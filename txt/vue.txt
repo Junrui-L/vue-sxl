@@ -1,0 +1,340 @@
+vue和react都有组件化的概念
+
+vue结合webpack都会执行一个commonjs的规范，同时我们这个项目现在是跑在nodejs端，nodejs同时也会执行这个规范，这就大大方便我们的代码复用，在开发的同时会用到less或者sass,方便我们对之间类似也会有一个引用的过程，整个项目都趋向于模块化
+
+前期vue可以根据不同id值的模板来进行模块的开发，对应每一个模板，都会有对应的实例对象就相当于一个model层，可提供数据。
+
+vue集成了自己的模版引擎以，在需要便利的遍历数据及
+
+一些指令都可以帮我们省略一些节点的操作v-if  v-show仅仅需要对属性值进行操作即可
+
+基本结构
+var app5 = new Vue({
+  el: '#app-5',
+  data: {
+     todos: [
+      { text: 'Learn JavaScript' },
+      { text: 'Learn Vue' },
+      { text: 'Build something awesome' }
+    ]
+  },
+  methods: {
+    reverseMessage: function () {
+      this.message = this.message.split('').reverse().join('')
+    }
+  }
+})
+
+Vue 构造器，需要传入一个选项对象，它可以包含数据、模板、挂载元素、方法、生命周期钩子等选项。全部的选项可以在 API 文档中查看，如果没有le的话，。。。。
+
+可以扩展 Vue 构造器，从而用预定义选项创建可复用的组件构造器：
+var MyComponent = Vue.extend({
+  // 扩展选项
+})
+// 所有的 `MyComponent` 实例都将以预定义的扩展选项被创建
+var myComponentInstance = new MyComponent()
+
+尽管可以命令式地创建扩展实例，不过在多数情况下将组件构造器注册为一个自定义元素，然后声明式地用在模板中。我们将在后面详细说明组件系统。现在你只需知道所有的 Vue.js 组件其实都是被扩展的 Vue 实例。
+
+
+data实际上已经被默认了，直接app5.todos即可
+
+处理用户输入用v-on,绑定监听事件，调用实例中的方法，methods
+
+v-model表单输入和应用状态做双向数据绑定
+
+
+
+Vue 采用自底向上增量开发的设计。Vue 的核心库只关注视图层
+Vue 完全有能力驱动采用单文件组件和Vue生态系统支持的库开发的复杂单页应用。
+Vue.js 的核心是一个允许你采用简洁的模板语法来声明式的将数据渲染进 DOM 的系统，响应式的双向数据绑定
+
+
+
+组件的概念：
+小组件构建大应用，任何页面的应用都可以抽象为一个组建树组件树
+
+
+Vue.component('todo', {
+  template: '<li>This is a todo</li>'
+})
+
+
+幕课
+结合ES6
+结合angular指令的优点，双向数据绑定，同时也有react模块化的概念
+
+vue.js的一个组件，同时把html,css，js同时写在.vue的一个文件里，通过<template><template>,
+<script><script>,<style><style>三种来区分。
+
+官方脚手架搭建
+
+.vue（vuejs特有的一种文件）文件会在打包过程中（bulid目录下，有webpack文件）会转换成浏览器能识别的传统的html,css,js。
+
+利用官方的命令行工具进行安装，会有工具，
+安装环境：1.淘宝镜像2.cnpm install -g vue-cli(因为vue这个命令在dos中用不了)
+
+vue init webpack my-project
+webpack是使用webpack这套模版，和压缩和打包
+
+后期开发都是在src目录下进行的
+
+assert组建
+
+要跑起来，先下载依赖，前端开发的依赖非常多，跟其他的库或者插件有千丝万缕的关系，现在的任何一个项目都不是独立存在的，
+npm install 安装所有的依赖，
+为什么在这个目录下可以直接使用npm install，因为有一个package文件，里面有各种信息
+有指定依赖dependencies
+还有开发环境下的依赖devDependencies(开始选用webpack这套模板里带的依赖)如：
+1.bobel对ES6的一个转换
+2.css-looder是webpack读取css模块的一个工具
+3.vue-looder是把.vue文件转为浏览器能识别的html,js，css文件
+
+安装时后面带上-dev...可写入依赖到webpack。json里，别人直接nmp  installl即可.
+
+vue这套脚手架自带热更新
+
+通过webpack这类打包工具把一个.vue文件打成html，js,css过程不用担心，js就是一个new VUE{{...}}对象model层数据都是在vue这个对象里，表现层都在html里。合起来是一套脚手架工具。
+
+最后npm run dev
+在webpack.json的一段脚本里指向bulid里的dev-server用node执行。
+
+var app5 = new Vue({
+  el: '#app-5',
+  data: {
+	a:1,
+    ]
+  },
+  methods: {
+    reverseMessage: function () {
+
+    }
+  },
+  watch:{
+   "a":function(val,oldval){
+	console.log(val,oldVal)
+    }
+  }
+
+})
+
+vue.js的重要选项  date 
+可以用this来去，vue对象代理
+
+methods:方法
+
+watch:监听a,新值，旧值。
+
+
+模版指令-html和vue对象的粘合
+1.{{}}
+2.v-text="a"  经过处理，不解析html
+3.v-html="a"  会解析标签
+三种可换
+
+v-if=""  不渲染html
+v-show=""   通过css的display:none，或者block来渲染
+
+v-for   列表循环
+<ul>
+<li v-for="item in items">
+	<p v-text="item.label"></p>
+</li>
+<ul>
+
+v-on 事件绑定
+<button v-on:click="dethis"></button>
+<button @click="dethis"></button>
+dethis是vue对象里methdos里的方法
+
+v-bind 属性绑定
+<img v-bind:src="imageSrc">  这里的imageSrc是date里的数据
+Class常用，所以有简写的方式
+对象后面是布尔值，前面的属性是否展现
+<div :class="{red:isRed.is}"></div>
+数组，在date里。是展现的
+<div :class="[ClassA,ClassB]"></div>
+可以混写
+<div :class="[ClassA,{ClassB:isB,ClassC:isC]"></div>
+
+
+熟悉vue这套工具的结构
+index.html是所有程序的入口
+入口文件会默认调用main.js
+<app></app>标签在vue里是一个组件，在页面上会替换成别的东西，组件的改入写在main.js里面
+mainjs里面有一个vue对象
+new Vue({
+ el:"body",
+ compoents:{APP}
+})
+这是由于import Vue form "vue"
+vue在打包的时候会在node_modules中取（主角，vue框架）
+
+
+注册组件，之后才可以在html中使用，自动把驼峰的写法转为小写或带横杠。
+import Vue form "./App"   简写
+import Vue form "./App.vue"        
+imcompoents:{App}
+
+import是ES6的一个语法，
+类似  var App = require("./App")，等价。
+就是App.vue这个文件被引入当前文件下。
+
+.vue文件
+<hello><hello>同样需要注册
+在script中
+import Hello from './components/Hello'
+
+
+export default {
+  components: {
+    Hello
+  }
+}
+在'./components/Hello'
+
+这个目录中是存在Hello.vue的把它注册，即可写在<template>
+
+export也是ES6的语法类似于
+module.export={
+
+}
+default是默认值，不用管。
+
+hello.vue里
+vue推荐写法
+export default {
+          
+ data () {
+   
+ return {
+    
+  msg: 'Hello Vue!'
+  
+  }
+ 
+ }
+
+}
+
+ data () {
+   
+ return {
+    
+  msg: 'Hello Vue!'
+  
+  }
+ 
+ }
+也是ES6的一个语法，可换于
+data:function(){
+ return{
+  msg: 'Hello Vue!'
+ 
+ }
+}   
+类似与
+function data (){
+  return{
+  msg: 'Hello Vue!'
+ 
+ }
+}
+
+date里面的值都可以直接在对应<template>引用
+
+注意用export出来的东西会自动生成
+new Vue(){}里的一个参数，所以在模板里看不见。
+
+v-modle="a"  里的值，后面事件的参数是获取不到的，只能在method里用this.a的方法获取到date的值
+
+v-for里的值后面的标签可以用到,如v-bind;class属性里的布尔值，或者v-on=
+
+引用另外一个js文件
+const storage= "todos-vuejs"
+const是es6里的一个语法，定义一个常量写var也行
+export也是ES6的语法类似于
+module.export={
+
+}简单理解就是把它导出来。
+
+调用：在要调用的.vue的文件里，<script>里
+import store form "./store.js"或
+import store form "./store"
+
+则store为一个对象
+
+每次添加新值都用方法麻烦，用watch监听，用handler处理，有deep为true（状态也可以被改变）,全面监控。
+
+
+划分组件
+功能模块-select，pagenation
+页面区域-header，footer,sidebar
+
+组件之间的调用， 用
+import Header form "./header"
+注册之后
+new Vue({
+ el:"body",
+ compoents:{
+Header,Footer
+ }
+})
+
+<header></header>
+
+组件之间的通信
+props:["msg"]    父组件到子组件，也要在子组件在props里注册，儿子想听。
+
+import 自己回去找后缀，不管是引入js，还是vue组件，都在<script>里找
+
+注册自动将驼峰转为小写加-，在使用模版标签时，要用-的形式
+
+小东西直接用HTML代码，组件主要是实现一些特定功能，和显示一些数据，交互就要相互传值，组件之间的数据交换
+
+
+自定义事件:
+儿子想说的话要在data里先注册，4钟方法
+
+
+
+大型应用
+1.路由功能,配置hash地址，利用hash地址指向vue目录层级里面的文件，实现layout及局部刷新
+2.vue-resource 加载资源，发送请求ajax，或跨域
+3.vue-validator表单验证功能
+4.vue-devtoole  chrome开发者工具
+5.vue-cil脚手架工具，开始时已经安装
+6.vue-touch 移动端开发使用的工具
+
+
+官方文档
+如同 v-if 模板，你也可以用带有 v-for 的 <template> 标签来渲染多个元素块。例如：
+
+<ul>
+  <template v-for="item in items">
+    <li>{{ item.msg }}</li>
+    <li class="divider"></li>
+  </template>
+</ul>
+
+
+<input type="button"/>  等于 <button></button>
+
+http://guowenfh.github.io/2016/03/28/vue-webpack-06-router/
+
+http://router.vuejs.org/zh-cn/api/router-link.html
+
+
+http://vuefe.cn/guide/events.html#监听事件
+
+
+
+
+
+
+
+
+ 
+
+
+

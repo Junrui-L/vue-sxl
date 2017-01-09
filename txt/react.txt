@@ -1,0 +1,83 @@
+组件嵌套组件，小组件组合构成大组件
+
+组件高度可重用
+
+复杂场景下的高性能
+
+可扩展性可维护性
+
+jsx
+语法糖，拓展功能
+没有解析库是不行的引入相应的js
+type="text/jsx"	
+在js中写html代码
+
+var Hello = React.createClass({
+  render: function() {
+    return <div>Hello {this.props.name}</div>;
+  }
+});
+
+ReactDOM.render(
+  <Hello name="World" />,
+  document.getElementById('container')
+);
+
+
+被render解析才成dom节点 
+
+class是关键字，要用className
+
+还可写内联，用对象的方式
+
+
+
+样式属性要写成驼峰式
+
+生命周期：
+
+state初始状态，也是对象，三个生命周期，will,did
+先找初始化
+
+	
+.bind  es5标准中才有
+statue是可变的，prop是不变的
+statue每次变化都会让组件进入updeta状态
+
+一次render只能由一个标签，div包起来。
+
+事件直接用onClick=""
+
+
+不选择路由的话，可以使用选择利用组件的生命周期前后事件来取消当前组件的挂在，再把想要的组件从新渲染上去。
+
+
+stores是跟react数据流有关系
+大致的过程是这样的，View层不能直接对state进行操作，而需要依赖Actions派发指令来告知Store修改状态，Store接收Actions指令后发生相应的改变，View层同时跟着Store的变化而变化。
+
+举个例子：A组件要使B组件发生变化。首先，A组件需要执行一个Action，告知绑定B组件的Store发生变化，Store接收到派发的指令后改变，那相应的B组件的视图也就发生了改变。假如C，D，E，F组件绑定了和B组件相同的Store，那么C，D，E，F也会跟着变化。
+
+react+Redux来管理组件与组件之间，组件与数据模型之间的通信
+Redux只有唯一的state树，不管项目变的有多复杂，我也仅仅只需要管理一个State树
+
+main.js是在入口文件中，我们需要把App和redux建立起联系。Provider是react-redux提供的组件，它的作用是把store和视图绑定在了一起，这里的Store就是那个唯一的State树。当Store发生改变的时候，整个App就可以作出对应的变化
+
+
+Constants
+定义一些常量，把字符串转化为常量，方便其他组件掉用
+keyMirror这个方法非常的有用，它可以帮助我们轻松创建与键值key相等的常量。
+
+Action向store派发指令，action 函数会返回一个带有 type 属性的 Javascript Plain Object
+
+Reducers
+Redux有且只有一个State状态树，为了避免这个状态树变得越来越复杂，Redux通过 Reducers来负责管理整个应用的State树
+
+智能组件，会通过react-redux函数提供的connect函数把state和actions转换为旗下木偶组件所需要的props。
+
+conponent是独立的组件
+
+
+
+
+
+

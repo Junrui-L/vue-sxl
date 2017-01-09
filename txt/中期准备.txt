@@ -1,0 +1,23 @@
+在以下轻量级框架中选型
+1.vuejs
+2.reactjs
+
+
+reactjs的进一步探索。
+
+一、reactjs是一个组件化概念强于vuejs,注重组件的复用，参照安全家2.0开发方案有疑问：系统哪里需要组件封装，组件的复用，是否全部使用组件化开发。
+
+二、reactjs的使用方法
+1.react 直接当作V层来使用
+2.react + Flux
+http://www.cocoachina.com/webapp/20150928/13600.html
+3.react + Redux  
+http://www.jianshu.com/p/0e42799be566
+
+三、整体开发模式：
+reactjs + webpack 的方式
+
+四、模板引擎问题
+不管是vuejs还是reactjs都有自带指令或者模版引擎解析数据，选用nodejs与前端共用的第三方模版引擎是否会有冲突。
+
+
